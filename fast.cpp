@@ -31,6 +31,7 @@ void Fast::addPoint(const Point& p) {
     cout<<"Detect repeatation in the points inputed"<<endl;
   }else {
     points.push_back(p);
+    points_backup.push_back(p);
   };
 }
 
@@ -62,7 +63,7 @@ vector<vector<Point>> Fast::getColinearPoints() {
   vector<Point>::iterator itr_o;
   vector<vector<Point>> lines;
 
-  for (itr_o = points.begin(); ite_o != points.end(); itr_o++) {
+  for (itr_o = points_backup.begin(); ite_o != points_backup.end(); itr_o++) {
     vector<vector<Point>> lines_o;
     lines_o = getColinearPointsWithOrigin(*itr_o);
 
@@ -72,7 +73,9 @@ vector<vector<Point>> Fast::getColinearPoints() {
         lines.push_back(*itr_line);
       }
     }
+    points.pop_front();
   }
+  points = points_backup;
 
   return lines;
 }
@@ -128,6 +131,13 @@ vector<vector<Point>> Fast::returnToOriginalCoordinate(const vector<vector<Point
   return result;
 }
 
+
+void Fast::sort() {
+  std::sort(points.begin(), points.end());
+  std::sort(points_backup.begin(), points_backup.end());
+}
+
+
 /*
 vector<vector<Line>> Fast::getColinearPoints() {
   sort();
@@ -170,7 +180,3 @@ vector<vector<Line>> Fast::getColinearPoints() {
   }
 }
 */
-
-void Fast::sort() {
-  std::sort(points.begin(), points.end());
-}

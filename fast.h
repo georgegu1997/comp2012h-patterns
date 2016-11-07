@@ -41,7 +41,7 @@ private:
   vector<vector<Point>> getColinearPointsWithOrigin(const Point& origin);
   vector<vector<Point>> returnToOriginalCoordinate(const vector<vector<PointWithOrigin>>&);
   void printInFormat(vector<vector<Point>>);
-  vector<Point> points;
+  vector<Point> points, points_backup;
 };
 
 #endif
