@@ -15,12 +15,12 @@ public:
   Vector2D();
   ~Vector2D();
 
-  Vector2D(double px, double py);
+  Vector2D(int px, int py);
 
-  void setX(double px);
-  void setY(double py);
-  double getX() const;
-  double getY() const;
+  void setX(int px);
+  void setY(int py);
+  int getX() const;
+  int getY() const;
 
   double getSlope() const;
 
@@ -28,12 +28,12 @@ public:
   bool operator<(const Vector2D& v) const;
   bool operator>(const Vector2D& v) const;
 
-  double operator*(const Vector2D& v) const;
+  int operator*(const Vector2D& v) const;
 
   static bool slopeLargerFirst(const Vector2D& v1, const Vector2D& v2);
 protected:
-  double x;
-  double y;
+  int x;
+  int y;
 };
 
 bool Vector2D::slopeLargerFirst(const Vector2D& v1, const Vector2D& v2) {

@@ -1,37 +1,37 @@
+//For Patterns of COMP 2012H @HKUST
+//Author: GU QIao
+//Email: georgegu1997@gmail.com
+//
+//All rights reserved.
+//
+//vector2D.cpp
+
 #include "vector2D.h"
-
-bool isEqual(const double d1, const double d2){
-  return ((d1-d2 < 1e-5) && (d2-d1 < 1e-5));
-}
-
-bool isEqual(const double d1, const int d2){
-  return ((d1-d2 < 1e-5) && (d2-d1 < 1e-5));
-}
 
 Vector2D::Vector2D() {}
 
 Vector2D::~Vector2D() {}
 
-Vector2D::Vector2D(double px, double py): x(px), y(py) {}
+Vector2D::Vector2D(int px, int py): x(px), y(py) {}
 
-void Vector2D::setX(double px) {
+void Vector2D::setX(int px) {
   x = px;
 }
 
-void Vector2D::setY(double py) {
+void Vector2D::setY(int py) {
   y = py;
 }
 
-double Vector2D::getX() const{
+int Vector2D::getX() const{
   return x;
 }
 
-double Vector2D::getY() const{
+int Vector2D::getY() const{
   return y;
 }
 
 double Vector2D::getSlope() const {
-  if (isEqual(x, 0)) {
+  if (x == 0) {
     return 1e10;
   } else {
     return (y / x);
@@ -39,13 +39,13 @@ double Vector2D::getSlope() const {
 }
 
 bool Vector2D::operator==(const Vector2D& v) const{
-  return isEqual(x, v.getX()) && isEqual(y, v.getY());
+  return x == v.getX() && y == v.getY();
 }
 
 bool Vector2D::operator<(const Vector2D& v) const {
   if (*this == v){
     return false;
-  }else if (isEqual(x, v.getX())){
+  }else if (x == v.getX()){
     return y < v.getY();
   }else {
     return x < v.getX();
@@ -55,13 +55,13 @@ bool Vector2D::operator<(const Vector2D& v) const {
 bool Vector2D::operator>(const Vector2D& v) const {
   if (*this == v){
     return false;
-  }else if (isEqual(x, v.getX())){
+  }else if (x == v.getX()){
     return y > v.getY();
   }else {
     return x > v.getX();
   }
 }
 
-double Vector2D::operator*(const Vector2D& v) const {
+int Vector2D::operator*(const Vector2D& v) const {
   return (x * v.getX() + y * v.getY());
 }

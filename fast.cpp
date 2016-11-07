@@ -1,15 +1,18 @@
 #include "fast.h"
 #include <algorithm>
+#include "helpers.h"
 
-bool isEqual(const double d1, const double d2){
-  return ((d1-d2 < 1e-5) && (d2-d1 < 1e-5));
-}
+PointWithOrigin::PointWithOrigin() {}
+
+PointWithOrigin::~PointWithOrigin() {}
+
+PointWithOrigin::PointWithOrigin(const Point& origin, const Point p):Point(p.getX()-origin.getX(), p.getY()-origin.getY()), p(&p), origin(&origin) {}
 
 Fast::Fast() {}
 
 Fast::~Fast() {}
 
-void Fast::addPoint(Point& p) {
+void Fast::addPoint(const Point& p) {
   vector<Point>::iterator it=find(points.begin(), points.end(), p);
 
   if (it!=points.end()) {
@@ -24,6 +27,18 @@ void Fast::addPoint(int x, int y) {
 }
 
 vector<vector<Point>> Fast::getColinearPoints() {
+  sort();
+  vector<Point>::iterator itr_o;
+  vector<vector<Point>> lines;
+
+  for (itr_o = points.begin(); ite_o != points.end(); itr_o++) {
+    vector<Point> line;
+    line = getColinearPointsWithOrigin(itr_o);
+  }
+}
+
+/*
+vector<vector<Line>> Fast::getColinearPoints() {
   sort();
   vector<Point>::iterator itr, itr2;
   vector<vector<Point>> lines;
@@ -44,7 +59,7 @@ vector<vector<Point>> Fast::getColinearPoints() {
     int count = 0;
     vector<Point> line;
     for (itr2 = a.begin(); itr != a.end(); ++itr2) {
-      if(!isEqual(slope, itr2->getSlope) || itr2 == a.begin()){
+      if(!isEqual(slope, itr2->getSlope()) || itr2 == a.begin()){
 
         if(count>=3) {
           std::sort(line.begin(), line.end());
@@ -62,6 +77,10 @@ vector<vector<Point>> Fast::getColinearPoints() {
       }
     }
   }
+}
+*/
+vector<vector<Point>> Fast::getColinearPointsWithOrigin(const Point& origin) {
+  for
 }
 
 void Fast::sort() {
