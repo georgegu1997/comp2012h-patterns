@@ -4,8 +4,14 @@
 //
 //All rights reserved.
 //
-//helps.h
+//helpers.h
+#ifndef HELPERS_H
+#define HELPERS_H
 
-bool isEqual(const double d1, const double d2){
+
+inline bool doubleEqual(const double d1, const double d2){
   return ((d1-d2 < 1e-5) && (d2-d1 < 1e-5));
 }
+
+
+#endif

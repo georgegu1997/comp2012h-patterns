@@ -21,9 +21,9 @@ public:
   Point getPoint()const;
 
 private:
-  Point* p;
-  Point* origin;
-}
+  const Point* p;
+  const Point* origin;
+};
 
 class Fast {
 public:
@@ -34,13 +34,15 @@ public:
   void addPoint(int x, int y);
 
   void printColinearPoints();
-  vector<vector<Point>> getColinearPoints();
+  vector<vector<Point> > getColinearPoints();
 
 private:
   void sort();
-  vector<vector<Point>> getColinearPointsWithOrigin(const Point& origin);
-  vector<vector<Point>> returnToOriginalCoordinate(const vector<vector<PointWithOrigin>>&);
-  void printInFormat(vector<vector<Point>>);
+  vector<vector<Point> > getColinearPointsWithOrigin(const Point& origin);
+  vector<vector<Point> > returnToOriginalCoordinate(vector<vector<PointWithOrigin> >&);
+  void printInFormat(vector<vector<Point> >);
+  void printInFormat(vector<Point>);
+  void printInFormat(vector<PointWithOrigin>);
   vector<Point> points, points_backup;
 };
 

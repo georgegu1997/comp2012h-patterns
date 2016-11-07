@@ -34,7 +34,7 @@ double Vector2D::getSlope() const {
   if (x == 0) {
     return 1e10;
   } else {
-    return (y / x);
+    return ((double) y / (double) x);
   }
 }
 
