@@ -6,7 +6,19 @@ PointWithOrigin::PointWithOrigin() {}
 
 PointWithOrigin::~PointWithOrigin() {}
 
-PointWithOrigin::PointWithOrigin(const Point& origin, const Point p):Point(p.getX()-origin.getX(), p.getY()-origin.getY()), p(&p), origin(&origin) {}
+PointWithOrigin::PointWithOrigin(const Point& origin, const Point& p):Point(p.getX()-origin.getX(), p.getY()-origin.getY()), p(&p), origin(&origin) {}
+
+bool PointWithOrigin::operator==(const PointWithOrigin& p)const {
+  return isEqual(this->getSlope(), p.getSlope());
+}
+
+Point PointWithOrigin::getOrigin() const {
+  return *origin;
+}
+
+Point PointWithOrigin::getPoint() const {
+  return *p;
+}
 
 Fast::Fast() {}
 
@@ -26,15 +38,94 @@ void Fast::addPoint(int x, int y) {
   addPoint(Point(x,y));
 }
 
+void Fast::printColinearPoints() {
+  printInFormat(getColinearPoints());
+}
+
+void Fast::printInFormat(vector<vector<Point>>) {
+  vector<PointWithOrigin>::iterator in_itr;
+  vector<vector<PointWithOrigin>>::iterator out_itr;
+
+  for (out_itr = a.begin(); out_itr != a.end(); out_itr++) {
+    for(in_itr = out_itr->begin(); in_itr != out_itr->end(); in_itr++){
+      if(in_itr != out_itr->begin()){
+        cout<<"->";
+      }
+      cout<<*in_itr;
+    }
+    cout<<endl;
+  }
+}
+
 vector<vector<Point>> Fast::getColinearPoints() {
   sort();
   vector<Point>::iterator itr_o;
   vector<vector<Point>> lines;
 
   for (itr_o = points.begin(); ite_o != points.end(); itr_o++) {
-    vector<Point> line;
-    line = getColinearPointsWithOrigin(itr_o);
+    vector<vector<Point>> lines_o;
+    lines_o = getColinearPointsWithOrigin(*itr_o);
+
+    vector<vector<Point>>::iterator itr_line;
+    for (itr_line = lines_o.begin(); itr_line = lines_o.end(); itr_line ++) {
+      if(!std::find(lines.begin(), lines.end(), *itr_line)) {
+        lines.push_back(*itr_line);
+      }
+    }
   }
+
+  return lines;
+}
+
+vector<vector<Point>> Fast::getColinearPointsWithOrigin(const Point& origin) {
+  vector<PointWithOrigin> line;
+  vector<vector<PointWithOrigin>> lines;
+
+  Vector<Point>::iterator itr;
+  vector<PointWithOrigin> a;
+
+  for (itr = points.begin(); itr != points.end(); itr++) {
+    if(*itr != origin) {
+      a.push_back(PointWithOrigin(origin, *itr));
+    }
+  }
+
+  std::sort(a.begin(), a.end(), Vector2D::slopeLargerFirst);
+
+  for (itr = a.begin(); itr != a.end(); itr++) {
+    if (line.empty()) {
+      line.push_back(*itr);
+    }else {
+      if(line.back() == *itr) {
+        line.push_back(*itr);
+      }else {
+        if(line.size()>=2){
+          lines.push_back(line);
+        }
+        line.clear();
+      }
+    }
+  }
+
+  return returnToOriginalCoordinate(lines);
+}
+
+vector<vector<Point>> Fast::returnToOriginalCoordinate(const vector<vector<PointWithOrigin>>& a) {
+  vector<PointWithOrigin>::iterator in_itr;
+  vector<vector<PointWithOrigin>>::iterator out_itr;
+
+  vector<vector<Point>> result;
+
+  for (out_itr = a.begin(); out_itr != a.end(); out_itr++) {
+    vector<Point> line;
+    line.push_back(out_itr->begin()->getOrigin());
+    for(in_itr = out_itr->begin(); in_itr != out_itr->end(); in_itr++){
+      line.push_back(in_itr->getPoint());
+    }
+    sort(line.begin(), line.end());
+    result.push_back(line);
+  }
+  return result;
 }
 
 /*
@@ -79,9 +170,6 @@ vector<vector<Line>> Fast::getColinearPoints() {
   }
 }
 */
-vector<vector<Point>> Fast::getColinearPointsWithOrigin(const Point& origin) {
-  for
-}
 
 void Fast::sort() {
   std::sort(points.begin(), points.end());

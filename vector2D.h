@@ -25,6 +25,7 @@ public:
   double getSlope() const;
 
   bool operator==(const Vector2D& v) const;
+  bool operator!=(const Vector2D& v) const;
   bool operator<(const Vector2D& v) const;
   bool operator>(const Vector2D& v) const;
 

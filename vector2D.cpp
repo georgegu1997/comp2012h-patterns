@@ -42,6 +42,10 @@ bool Vector2D::operator==(const Vector2D& v) const{
   return x == v.getX() && y == v.getY();
 }
 
+bool Vector2D::operator!=(const Vector2D v) const {
+  return !(*this == v);
+}
+
 bool Vector2D::operator<(const Vector2D& v) const {
   if (*this == v){
     return false;
