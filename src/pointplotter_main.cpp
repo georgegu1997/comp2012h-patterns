@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
 
   QApplication a(argc, argv);
   QWidget* w = new MainWindow();
-  a.setMainWidget(w);
   w.loadFile(argv[1]);
 
   w->show();

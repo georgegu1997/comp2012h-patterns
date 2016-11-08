@@ -24,6 +24,9 @@ Point PointWithOrigin::getPoint() const {
 
 Fast::Fast() {}
 
+Fast::Fast(const vector<Point> ps)
+:points(ps) {} 
+
 Fast::~Fast() {}
 
 void Fast::addPoint(const Point& p) {

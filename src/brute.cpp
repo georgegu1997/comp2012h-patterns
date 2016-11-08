@@ -5,6 +5,9 @@
 
 Brute::Brute() {}
 
+Brute::Brute(const vector<Point> ps)
+:points(ps) {}
+
 Brute::~Brute() {}
 
 void Brute::addPoint(const int x, const int y) {

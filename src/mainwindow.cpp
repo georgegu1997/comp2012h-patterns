@@ -1,7 +1,9 @@
 #include "mainwindow.h"
+#include <fstream>
+#include <algorithm>
+#include "assert.h"
 
-MainWindow::MainWindow(QWidget *parent = 0, const char* name = 0)
-:QMainWindow(parent, name), min_x(0), max_x(32768), min_y(0), max_y(32768) {
+MainWindow::MainWindow(QWidget *parent, const char* name) {
   setMinimumSize(600,600);
 
   menubar = this->menuBar();
@@ -15,12 +17,48 @@ MainWindow::MainWindow(QWidget *parent = 0, const char* name = 0)
 
   file_menu->addAction(action_brute);
   file_menu->addAction(action_fast);
-  file_menu->addSeperator();
+  file_menu->addSeparator();
   file_menu->addAction(action_exit);
 
   help_menu->addAction(action_about);
 
   connect(action_exit, SIGNAL(triggered()), this, SLOT(onActionExit()));
+}
+
+MainWindow::~MainWindow() {}
+
+void MainWindow::loadFile(char * file_name) {
+  ifstream fin(file_name);
+  assert (fin.is_open());
+
+  int size;
+  fin >> size;
+
+  int x, y;
+
+  while(!cin.eof()) {
+    cin >> x;
+    cin >> y;
+    Point p(x, y);
+
+    if(points.size() > 1){
+      if(std::find(points.begin(), points.end(), p) != points.end()){
+        cout<< "repeatation in point input detected"<<endl;
+      }else{
+        points.push_back(p);
+      }
+    }else {
+      points.push_back(p);
+    }
+  }
+
+}
+
+void MainWindow::plotPoints() {
+  vector<Point>::Iterator itr;
+  for (itr = points.begin(); itr != points.end(); itr++) {
+    
+  }
 }
 
 void MainWindow::onActionExit() {
