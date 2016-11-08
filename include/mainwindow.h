@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtGui>
 #include <vector>
 #include "brute.h"
 #include "fast.h"
@@ -23,6 +24,8 @@ public slots:
   void onActionExit();
 
 private:
+  void plotPoints();
+
   vector<Point> points;
 
   QMenuBar* menubar;
@@ -34,6 +37,8 @@ private:
   QAction* action_fast;
   QAction* action_exit;
   QAction* action_about;
+
+  QLabel* draw_board;
 
 };
 

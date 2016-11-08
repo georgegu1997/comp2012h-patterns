@@ -28,6 +28,7 @@ private:
 class Fast {
 public:
   Fast();
+  Fast(const vector<Point>);
   ~Fast();
 
   void addPoint(const Point& p);

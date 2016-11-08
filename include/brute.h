@@ -13,6 +13,7 @@ class Brute {
 public:
   //Deafault constructor
   Brute();
+  Brute(const vector<Point>);
   ~Brute();
 
   void addPoint(const int x, const int y);
