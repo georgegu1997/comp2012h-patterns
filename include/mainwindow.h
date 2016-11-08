@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "brute.h"
+#include "fast.h"
+#include "point.h"
 
 class MainWindow : public QMainWindow
 {
