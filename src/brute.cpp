@@ -53,7 +53,7 @@ bool Brute::check4Colinear(int i1, int i2 ,int i3, int i4) {
   double slope2 = points[i3].measureAngle(points[i1]);
   double slope3 = points[i4].measureAngle(points[i1]);
   //cout <<slope1<<"  "<<slope2<<"  "<<slope3<<endl;
-  return isEqual(slope1, slope2) && isEqual(slope2, slope3);
+  return doubleEqual(slope1, slope2) && doubleEqual(slope2, slope3);
 }
 
 void Brute::printLine(int i1, int i2, int i3, int i4) {
