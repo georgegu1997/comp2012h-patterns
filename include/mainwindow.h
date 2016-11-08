@@ -2,9 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <vector>
 #include "brute.h"
 #include "fast.h"
 #include "point.h"
+
+using std::vector;
 
 class MainWindow : public QMainWindow
 {
@@ -14,10 +17,14 @@ public:
   MainWindow(QWidget *parent = 0, const char* name = 0);
   ~MainWindow();
 
+  void loadFile(char *);
+
 public slots:
   void onActionExit();
 
 private:
+  vector<Point> points;
+
   QMenuBar* menubar;
 
   QMenu* file_menu;
