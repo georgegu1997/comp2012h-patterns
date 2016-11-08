@@ -31,6 +31,8 @@ public:
 
   int operator*(const Vector2D& v) const;
 
+  int operator^(const Vector2D& v) const;
+
   static bool slopeLargerFirst(const Vector2D& v1, const Vector2D& v2) {
     return v1.getSlope() > v2.getSlope();
   };

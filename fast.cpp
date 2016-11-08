@@ -11,7 +11,7 @@ PointWithOrigin::~PointWithOrigin() {}
 PointWithOrigin::PointWithOrigin(const Point& origin, const Point& p):Point(p.getX()-origin.getX(), p.getY()-origin.getY()), p(&p), origin(&origin) {}
 
 bool PointWithOrigin::operator==(const PointWithOrigin& p)const {
-  return doubleEqual(this->getSlope(), p.getSlope());
+  return (*this ^ p) == 0;
 }
 
 Point PointWithOrigin::getOrigin() const {

@@ -69,3 +69,7 @@ bool Vector2D::operator>(const Vector2D& v) const {
 int Vector2D::operator*(const Vector2D& v) const {
   return (x * v.getX() + y * v.getY());
 }
+
+int Vector2D::operator^(const Vector2D& v) const {
+  return (x * v.getY() - y * v.getX());
+}
