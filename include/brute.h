@@ -18,6 +18,7 @@ public:
 
   void addPoint(const int x, const int y);
   void addPoint(const Point& p);
+  vector<vector<Point> > getColinearPoints();
   void printColinearPoints();
 
 private:

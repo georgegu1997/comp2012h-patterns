@@ -7,6 +7,7 @@
 #include "brute.h"
 #include "fast.h"
 #include "point.h"
+#include "drawboard.h"
 
 using std::vector;
 
@@ -23,8 +24,11 @@ public:
 public slots:
   void onActionExit();
 
+  void onActionBrute();
+
+  void onActionFast();
+
 private:
-  void plotPoints();
 
   vector<Point> points;
 
@@ -38,7 +42,7 @@ private:
   QAction* action_exit;
   QAction* action_about;
 
-  QLabel* draw_board;
+  DrawBoard* draw_board;
 
 };
 

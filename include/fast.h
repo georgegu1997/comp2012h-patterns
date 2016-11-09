@@ -44,7 +44,7 @@ private:
   void printInFormat(vector<vector<Point> >);
   void printInFormat(vector<Point>);
   void printInFormat(vector<PointWithOrigin>);
-  vector<Point> points, points_backup;
+  vector<Point> points;
 };
 
 #endif
