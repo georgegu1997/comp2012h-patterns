@@ -16,7 +16,6 @@
 using std::ifstream;
 
 MainWindow::MainWindow() {
-  setMinimumSize(860,860);
 
   menubar = this->menuBar();
   file_menu = menubar->addMenu(tr("File"));
@@ -68,7 +67,7 @@ void MainWindow::loadFile(char * file_name) {
 
     if(points.size() > 1){
       if(std::find(points.begin(), points.end(), p) != points.end()){
-        cout<< "repeatation in point input detected"<<endl;
+        //cout<< "repeatation in point input detected"<<endl;
       }else{
         points.push_back(p);
       }
@@ -99,6 +98,7 @@ void MainWindow::onActionBrute() {
   vector<vector<Point> > lines = b.getColinearPoints();
   draw_board->drawLines(lines);
   msg_box.setText(QString("Time used: %1 ms  ").arg(t.elapsed()));
+  b.printColinearPoints();
   msg_box.exec();
 }
 

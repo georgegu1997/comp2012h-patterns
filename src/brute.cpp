@@ -42,9 +42,9 @@ vector<vector<Point> > Brute::getColinearPoints() {
 
   int l1, l2, l3, l4;
   for (l1 = 0; l1 < n-3; l1 ++) {
-    for (l2 = l1; l2 < n-2; l2 ++) {
-      for (l3 = l2; l3 < n-1; l3 ++) {
-        for (l4 = l3; l4 < n; l4 ++) {
+    for (l2 = l1+1; l2 < n-2; l2 ++) {
+      for (l3 = l2+1; l3 < n-1; l3 ++) {
+        for (l4 = l3+1; l4 < n; l4 ++) {
           if(check4Colinear(l1,l2,l3,l4)) {
             line.clear();
             line.push_back(points[l1]);

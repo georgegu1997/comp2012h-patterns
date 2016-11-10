@@ -14,8 +14,8 @@
 #include "point.h"
 
 //some constants about the DrawBoard
-const int BOARD_WIDTH = 800;
-const int BOARD_HEIGHT = 800;
+const int BOARD_WIDTH = 600;
+const int BOARD_HEIGHT = 600;
 const int WINDOW_MARGIN = 30;
 
 using std::vector;

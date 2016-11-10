@@ -12,6 +12,7 @@ DrawBoard::DrawBoard()
 :left_x(0 + WINDOW_MARGIN), bottom_y(BOARD_HEIGHT - WINDOW_MARGIN), scale_x(BOARD_WIDTH / 32768.0), scale_y(BOARD_HEIGHT / 32768.0) {
   background = new QImage(BOARD_WIDTH + 2 * WINDOW_MARGIN, BOARD_HEIGHT + 2 * WINDOW_MARGIN, QImage::Format_RGB32);
   painter = new QPainter(background);
+  this->setMinimumSize(50,50);
   this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   this->setScaledContents(true);
 
