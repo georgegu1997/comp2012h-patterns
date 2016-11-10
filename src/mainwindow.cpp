@@ -98,7 +98,6 @@ void MainWindow::onActionBrute() {
   vector<vector<Point> > lines = b.getColinearPoints();
   draw_board->drawLines(lines);
   msg_box.setText(QString("Time used: %1 ms  ").arg(t.elapsed()));
-  b.printColinearPoints();
   msg_box.exec();
 }
 

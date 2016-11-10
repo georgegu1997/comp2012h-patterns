@@ -58,32 +58,7 @@ vector<vector<Point> > Brute::getColinearPoints() {
       }
     }
   }
-/*
-  int k;
-  vector<int> indexes(4);
-  vector<bool> v(n);
-  std::fill(v.end() - 4, v.end(), true);
-  do {
-    k = 0;
-    for(int i = 0; i < n; ++i) {
-      if(v[i]) {
-        indexes[k] = i;
-        k++;
-      }
-    }
-    //counter++;
-    //cout<<"time: "<<counter<<endl;
-    if(check4Colinear(indexes[0],indexes[1],indexes[2],indexes[3])) {
-      line.clear();
-      line.push_back(points[indexes[0]]);
-      line.push_back(points[indexes[1]]);
-      line.push_back(points[indexes[2]]);
-      line.push_back(points[indexes[3]]);
-
-      lines.push_back(line);
-    }
-  } while (std::next_permutation(v.begin(), v.end()));
-*/
+  printInFormat(lines);
   return lines;
 }
 
@@ -111,6 +86,8 @@ void Brute::printLine(int i1, int i2, int i3, int i4) {
 void Brute::printInFormat(vector<vector<Point> > a) {
   vector<Point>::iterator in_itr;
   vector<vector<Point> >::iterator out_itr;
+  
+  cout<<"Using Brute Algorithm:"<<endl;
 
   for (out_itr = a.begin(); out_itr != a.end(); out_itr++) {
     for(in_itr = out_itr->begin(); in_itr != out_itr->end(); in_itr++){

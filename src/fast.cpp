@@ -58,6 +58,8 @@ void Fast::printColinearPoints() {
 void Fast::printInFormat(vector<vector<Point> > a) {
   vector<Point>::iterator in_itr;
   vector<vector<Point> >::iterator out_itr;
+  
+  cout<<"Using Fast Algorithm: "<<endl;
 
   for (out_itr = a.begin(); out_itr != a.end(); out_itr++) {
     cout<<out_itr->size()<<": ";
@@ -88,6 +90,8 @@ vector<vector<Point> > Fast::getColinearPoints() {
     }
     //points.erase(points.begin());
   }
+  
+  printInFormat(lines);
 
   return lines;
 }
