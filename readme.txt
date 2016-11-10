@@ -13,10 +13,9 @@ Hours to complete assignment (optional): 20
  *           What method(s) did you add to the Point data type?
  **********************************************************************/
 
-I adopt an algorithm from standard library std::next_permutation to get
-the combination of the points. Four points are got every times. Then compute
-their slopes and compare. If they are equal, a line is formed, if not, go
-to next one.
+I used four nested for loop to get the combination of the points. Four
+points are got every times. Then compute their slopes and compare. If
+they are equal, a line is formed, if not, go to next one.
 
 I use Vector2D as the base class of the Point. It has methods to compute
 the dot product and cross product. I overload the operator<< to give the
@@ -48,28 +47,32 @@ be pushed to the lines.
 
       N       brute       sorting
 ---------------------------------
-     10
-     20
-     40
-     80
-    100
-    150
-    200
-    400
-   1000
-   2000
-   4000
-  10000
+     10       0.000       0.000
+     20       0.000       0.000
+     40       0.004       0.000
+     80       0.043       0.000
+    100       0.098       0.001
+    150       0.479       0.003
+    200       1.489       0.006
+    400       23.79       0.029
+   1000       >180        0.169
+   2000       >180        0.731
+   4000       >180        3.215
+  10000       >180        22.94
 
 
 /**********************************************************************
  *  Estimate how long it would take to solve an instance of size
  *  N = 1,000,000 for each of the two algorithms using your computer.
  **********************************************************************/
-Brute:
-Sorting:
 
+Use result of 400 points as reference.
 
+Brute: 23.79*(1000000/400)^4 = 929,296,875,000,000s = 29,467,810 year
+
+Use result of 10000 points as reference.
+
+Sorting: 22.94*(1000000/10000)^3 = 22,940,000s = 265 day
 
 /**********************************************************************
  *  Theoretical   Give the worst-case running time of your programs
@@ -94,14 +97,14 @@ No.
  *  the names of lab TAs, classmates, or course staff members.
  **********************************************************************/
 
-
+I saw some of codes in the github about this project. Main those of a
+previous HKUST student, TAN Shuhao.
 
 /**********************************************************************
  *  Describe any serious problems you encountered.
  **********************************************************************/
 
-
-
+Nothing very serious.
 
 /**********************************************************************
  *  List any other comments here. Feel free to provide any feedback
