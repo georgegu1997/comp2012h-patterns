@@ -1,3 +1,11 @@
+//For Patterns of COMP 2012H @HKUST
+//Author: GU QIao
+//Email: georgegu1997@gmail.com
+//
+//All rights reserved.
+//
+//fast.cpp
+//implementation for fast class.
 #include "fast.h"
 #include <algorithm>
 
@@ -25,7 +33,7 @@ Point PointWithOrigin::getPoint() const {
 Fast::Fast() {}
 
 Fast::Fast(const vector<Point> ps)
-:points(ps) {} 
+:points(ps) {}
 
 Fast::~Fast() {}
 
@@ -33,10 +41,9 @@ void Fast::addPoint(const Point& p) {
   vector<Point>::iterator it=find(points.begin(), points.end(), p);
 
   if (it!=points.end()) {
-    cout<<"Detect repeatation in the points inputed"<<endl;
+    //cout<<"Detect repeatation in the points inputed"<<endl;
   }else {
     points.push_back(p);
-    points_backup.push_back(p);
   };
 }
 
@@ -53,6 +60,7 @@ void Fast::printInFormat(vector<vector<Point> > a) {
   vector<vector<Point> >::iterator out_itr;
 
   for (out_itr = a.begin(); out_itr != a.end(); out_itr++) {
+    cout<<out_itr->size()<<": ";
     for(in_itr = out_itr->begin(); in_itr != out_itr->end(); in_itr++){
       if(in_itr != out_itr->begin()){
         cout<<"->";
@@ -63,34 +71,12 @@ void Fast::printInFormat(vector<vector<Point> > a) {
   }
 }
 
-void Fast::printInFormat(vector<Point> a) {
-  vector<Point>::iterator in_itr;
-  for(in_itr = a.begin(); in_itr != a.end(); in_itr++){
-    if(in_itr != a.begin()){
-      cout<<"->";
-    }
-    cout<<*in_itr;
-  }
-  cout<<endl;
-}
-
-void Fast::printInFormat(vector<PointWithOrigin> out_itr) {
-  vector<PointWithOrigin>::iterator in_itr;
-  for(in_itr = out_itr.begin(); in_itr != out_itr.end(); in_itr++){
-    if(in_itr != out_itr.begin()){
-      cout<<"->";
-    }
-    cout<<*in_itr;
-  }
-  cout<<endl;
-}
-
 vector<vector<Point> > Fast::getColinearPoints() {
   sort();
   vector<Point>::iterator itr_o;
   vector<vector<Point> > lines;
 
-  for (itr_o = points_backup.begin(); itr_o != points_backup.end(); itr_o++) {
+  for (itr_o = points.begin(); itr_o != points.end(); itr_o++) {
     vector<vector<Point> > lines_o;
     lines_o = getColinearPointsWithOrigin(*itr_o);
 
@@ -102,7 +88,6 @@ vector<vector<Point> > Fast::getColinearPoints() {
     }
     //points.erase(points.begin());
   }
-  points = points_backup;
 
   return lines;
 }
@@ -124,23 +109,18 @@ vector<vector<Point> > Fast::getColinearPointsWithOrigin(const Point& origin) {
   }
 
   std::sort(a.begin(), a.end(), Vector2D::slopeLargerFirst);
-  //printInFormat(a);
   vector<PointWithOrigin>::iterator itr_o;
 
   for (itr_o = a.begin(); itr_o != a.end(); itr_o++) {
-    //cout<<itr_o->getSlope()<<endl;
     if (line.empty()) {
       line.push_back(*itr_o);
     }else {
-      //cout<<"front:"<<line.front().getSlope()<<endl;
+      //test slopes of two PointWithOrigin are equal
       if(line.front() == *itr_o) {
-
-        //cout<<"add point"<<endl;
         line.push_back(*itr_o);
       }else {
-        if(line.size()>=2){
+        if(line.size()>=3){
           lines.push_back(line);
-          //cout<<"found"<<endl;
         }
         line.clear();
         line.push_back(*itr_o);
@@ -148,9 +128,8 @@ vector<vector<Point> > Fast::getColinearPointsWithOrigin(const Point& origin) {
     }
   }
 
-  if(line.size()>=2){
+  if(line.size()>=3){
     lines.push_back(line);
-    //cout<<"found"<<endl;
   }
   line.clear();
 
@@ -178,49 +157,4 @@ vector<vector<Point> > Fast::returnToOriginalCoordinate(vector<vector<PointWithO
 
 void Fast::sort() {
   std::sort(points.begin(), points.end());
-  std::sort(points_backup.begin(), points_backup.end());
 }
-
-
-/*
-vector<vector<Line>> Fast::getColinearPoints() {
-  sort();
-  vector<Point>::iterator itr, itr2;
-  vector<vector<Point>> lines;
-
-  for (itr = points.begin(); itr != points.end(); ++itr){
-    vector<Point> a;
-
-    for(itr2 = points.begin(); itr != points.end(); ++itr2){
-      if(itr2 != itr) {
-        Point v(itr->getX() - itr2->getX(), itr->getY() - itr2->getY());
-        a.push_back(v);
-      }
-    }
-
-    std::sort(a.begin(), a.end(), Vector2D::slopeLargerFirst);
-
-    double slope;
-    int count = 0;
-    vector<Point> line;
-    for (itr2 = a.begin(); itr != a.end(); ++itr2) {
-      if(!doubleEqual(slope, itr2->getSlope()) || itr2 == a.begin()){
-
-        if(count>=3) {
-          std::sort(line.begin(), line.end());
-          lines.push_back(line);
-          break;
-        }else{
-          slope = itr2->getSlope();
-          count = 1;
-          line.clear();
-          line.push_back(*itr2);
-        }
-      }else {
-        count ++;
-        line.push_back(*itr2);
-      }
-    }
-  }
-}
-*/

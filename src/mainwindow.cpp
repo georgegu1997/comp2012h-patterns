@@ -1,10 +1,22 @@
+//For Patterns of COMP 2012H @HKUST
+//Author: GU QIao
+//Email: georgegu1997@gmail.com
+//
+//All rights reserved.
+//
+//The header file for MainWindow class of the PointPllotter.
 #include "mainwindow.h"
 #include <fstream>
 #include <algorithm>
 #include "assert.h"
+#include <QTimer>
+#include <QMessageBox>
+#include <QString>
 
-MainWindow::MainWindow(QWidget *parent, const char* name) {
-  setMinimumSize(600,600);
+using std::ifstream;
+
+MainWindow::MainWindow() {
+  setMinimumSize(860,860);
 
   menubar = this->menuBar();
   file_menu = menubar->addMenu(tr("File"));
@@ -23,9 +35,22 @@ MainWindow::MainWindow(QWidget *parent, const char* name) {
   help_menu->addAction(action_about);
 
   connect(action_exit, SIGNAL(triggered()), this, SLOT(onActionExit()));
+  connect(action_fast, SIGNAL(triggered()), this, SLOT(onActionFast()));
+  connect(action_brute, SIGNAL(triggered()), this, SLOT(onActionBrute()));
+  connect(action_about, SIGNAL(triggered()), this, SLOT(onActionAbout()));
+
+  draw_board = new DrawBoard();
+
+  setCentralWidget(draw_board);
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow() {
+  delete action_exit;
+  delete action_brute;
+  delete action_fast;
+  delete action_about;
+  delete draw_board;
+}
 
 void MainWindow::loadFile(char * file_name) {
   ifstream fin(file_name);
@@ -36,9 +61,9 @@ void MainWindow::loadFile(char * file_name) {
 
   int x, y;
 
-  while(!cin.eof()) {
-    cin >> x;
-    cin >> y;
+  while(!fin.eof()) {
+    fin >> x;
+    fin >> y;
     Point p(x, y);
 
     if(points.size() > 1){
@@ -51,16 +76,39 @@ void MainWindow::loadFile(char * file_name) {
       points.push_back(p);
     }
   }
+  fin.close();
 
-}
-
-void MainWindow::plotPoints() {
-  vector<Point>::Iterator itr;
-  for (itr = points.begin(); itr != points.end(); itr++) {
-    
-  }
+  draw_board->drawPoints(points);
 }
 
 void MainWindow::onActionExit() {
   this->close();
+}
+
+void MainWindow::onActionAbout() {
+  QMessageBox msg_box;
+  msg_box.setText("Written by GU, Qiao  ");
+  msg_box.exec();
+}
+
+void MainWindow::onActionBrute() {
+  QTime t;
+  QMessageBox msg_box;
+  t.start();
+  Brute b(points);
+  vector<vector<Point> > lines = b.getColinearPoints();
+  draw_board->drawLines(lines);
+  msg_box.setText(QString("Time used: %1 ms  ").arg(t.elapsed()));
+  msg_box.exec();
+}
+
+void MainWindow::onActionFast() {
+  QMessageBox msg_box;
+  QTime t;
+  t.start();
+  Fast f(points);
+  vector<vector<Point> > lines = f.getColinearPoints();
+  draw_board->drawLines(lines);
+  msg_box.setText(QString("Time used: %1 ms  ").arg(t.elapsed()));
+  msg_box.exec();
 }

@@ -31,10 +31,11 @@ void Point::print() const {
 }
 
 void Point::draw(QPainter* painter,  int left_x, int bottom_y, double scale_x, double scale_y) const {
-  painter->setRenderHint(QPainter::Antialiasing, true);
-  painter->setBrush(QColor(0,0,0));
-  painter->setPen(QColor(0,0,0));
-  painter->drawEllipse(QPointF(left_x + scale_x * x, bottom_y - scale_y * y), 4, 4);
+  //painter->setRenderHint(QPainter::Antialiasing, true);
+  painter->setBrush(Qt::black);
+  painter->setPen(Qt::black);
+  painter->drawEllipse(QPointF(left_x + scale_x * x, bottom_y - scale_y * y), 2, 2);
+  //cout<<"draw at"<<"(" <<left_x + scale_x * x <<", "<<bottom_y - scale_y * y<< ") "<<endl;
 }
 
 void Point::drawTo(const Point& p, QPainter* painter,  int left_x, int bottom_y, double scale_x, double scale_y) const {

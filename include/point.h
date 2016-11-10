@@ -25,12 +25,19 @@ public:
   //Conversion constructor
   Point(double px, double py);
 
+  //return the angle between two points.
   double measureAngle (const Point&);
 
+  //format cout.
   void print() const;
+
+  //draw this points. Need QPainter input.
   void draw(QPainter* painter,  int left_x, int bottom_y, double scale_x, double scale_y) const;
+
+  //draw line from this Point to another.
   void drawTo(const Point& p, QPainter* painter,  int left_x, int bottom_y, double scale_x, double scale_y) const;
 
+  //format output used in ostream.
   friend ostream& operator<<(ostream& os, const Point& p);
 };
 
